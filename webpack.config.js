@@ -1,19 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/simpleMatch3-TS-PIXI-/',
     clean: true,
   },
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    static: './dist',
-    open: true,
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -21,28 +19,30 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-      }
+      },
     ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new CopyWebpackPlugin({
+    new CopyPlugin({
       patterns: [
-        { from: 'public', to: '', globOptions: { ignore: ['**/index.html'] } } // копируем всё из public в dist
-      ]
-    })
+        {
+          from: 'public',
+          to: '.',
+          globOptions: {
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
+    }),
   ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
     port: 8081,
-    hot: true
+    open: true,
   },
-  mode: 'development'
 };

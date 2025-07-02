@@ -40,11 +40,11 @@ function getRandomInt(min:number, max:number) {
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 }
 
-const sheetTexture = await PIXI.Assets.load('/cube.png');
+const sheetTexture = await PIXI.Assets.load('cube.png');
 const global_frames = [];
 PIXI.Assets.add({
     alias: 'cube_anim',
-    src: '/cube.json',
+    src: 'cube.json',
     data: {texture: sheetTexture}
     });
 const sheet = await PIXI.Assets.load('cube_anim')
