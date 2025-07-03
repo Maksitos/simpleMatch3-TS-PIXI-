@@ -1,9 +1,10 @@
+import { Color } from "pixi.js";
 export const grid_height = 10;
 export const grid_width = 10;
 export const start_x_pos = 40;
 export const start_y_pos = 40;
 export const cell_delta_x = 64;
 export const cell_delta_y = 64;
-export const type_colors = ['black', 'green', 'blue', 'yellow', 'white'];
+export const type_colors = ['rgb(235, 69, 149)', 'rgb(229, 127, 5)', 'rgb(137, 225, 16)', 'rgb(57, 163, 231)', 'rgb(115, 56, 233)'];
 export const cell_width = 64;
 export const cell_height = 64;
