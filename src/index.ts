@@ -6,13 +6,27 @@ import * as setting from './game_setting'
 const app = new PIXI.Application();
 await app.init({ 
     width: setting.cell_delta_x * setting.grid_width + 20, 
-    height: setting.cell_delta_y * setting.grid_height + 100, 
-    backgroundColor: 0x333333,
+    height: setting.cell_delta_y * setting.grid_height + 70, 
+    backgroundAlpha: 0,
     antialias: true,
     resolution: 1,
     preference: 'webgl',
 });
 document.body.appendChild(app.canvas);
+
+const background = new PIXI.Graphics();
+background.roundRect(0,0, setting.cell_delta_x * setting.grid_width + 20, setting.cell_delta_y * setting.grid_height + 70, 16)
+background.fill('rgba(48, 51, 54, 1)')
+app.stage.addChild(background)
+
+const cells_background = new PIXI.Graphics();
+const cells_background_x = (setting.start_x_pos - setting.cell_width /2) - 2
+const cells_background_y = (setting.start_x_pos - setting.cell_height /2) - 2
+const cells_background_width = (setting.cell_delta_x * setting.grid_width) + 4
+const cells_background_height = (setting.cell_delta_y * setting.grid_height) + 4
+cells_background.roundRect(cells_background_x,cells_background_y, cells_background_width, cells_background_height, 8)
+cells_background.fill('rgba(35, 37, 40, 1)')
+app.stage.addChild(cells_background)
 
 let score = 0;
 const score_text = new PIXI.Text({
@@ -25,7 +39,7 @@ const score_text = new PIXI.Text({
     },
     anchor: 0.5,
 })
-score_text.position.set(setting.cell_delta_x * setting.grid_width / 2, setting.cell_delta_y * setting.grid_height + 60)
+score_text.position.set(setting.cell_delta_x * setting.grid_width / 2, setting.cell_delta_y * setting.grid_height + 30)
 app.stage.addChild(score_text)
 
 function updateScore (cells: Cell[]) {
